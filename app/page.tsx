@@ -1,52 +1,66 @@
-'use client';
-import { useState } from "react";
+"use client";
+import Button from "@/_components/Button";
+import Link from "next/link";
 
 export default function Home() {
-
-  type postsTypes = {
-    id: number;
-    userId: number;
-    title: string;
-    body: string;
-  };
-
-  const [results, setResults] = useState<Array<postsTypes>>([]);
-
-  // useEffect(() => {
-    // }, [])
-  const getData = () => {
-    fetch("https://jsonplaceholder.typicode.com/posts/")
-    .then(res => res.json())
-    .then(json => setResults(json))
-    .catch(() => alert('error'));
-  }
-
-  const resetData = () => {
-    setResults([]);
-  }
-
-  console.log(results)
-
   return (
     <>
-      <div className="pt-24 mb-10 flex justify-center items-center gap-4">
-        <button onClick={getData}>GET</button>
-        {/* <button onClick={''}>POST</button> */}
-        {/* <button onClick={''}>DELETE</button> */}
+      <div className="h-screen flex flex-col justify-center items-center">
+        <h1 className="text-center text-[30px] font-bold mb-10">practice</h1>
+        <h2 className="text-center text-[25px] font-bold mb-8">fetch</h2>
+        <div className="mb-12 flex justify-center items-center gap-8">
+          <Link href={"/fetch/get"}>
+            <Button label="GETページへ" />
+          </Link>
+          <Link href={"/fetch/post"}>
+            <Button label="POSTページへ" />
+          </Link>
+          <Link href={"/fetch/delete"}>
+            <Button label="DELETEページへ" />
+          </Link>
+        </div>
+
+        <h2 className="text-center text-[25px] font-bold mb-8">axios</h2>
+        <div className="mb-12 flex justify-center items-center gap-8">
+          <Link href={"/axios/get"}>
+            <Button label="GETページへ" />
+          </Link>
+          <Link href={"/axios/post"}>
+            <Button label="POSTページへ" />
+          </Link>
+          {/* <Link href={"/delete"}>
+            <Button label="DELETEページへ" />
+          </Link> */}
+        </div>
+
+        <h2 className="text-center text-[25px] font-bold mb-8">
+          TanStack Query
+        </h2>
+        <div className="mb-12 flex justify-center items-center gap-8">
+          {/* <Link href={"/tanStackQuery/get"}>
+            <Button label="GETページへ" />
+          </Link> */}
+          {/* <Link href={"/tanStackQuery/post"}>
+            <Button label="POSTページへ" />
+          </Link> */}
+          {/* <Link href={"/delete"}>
+            <Button label="DELETEページへ" />
+          </Link> */}
+        </div>
+
+        <h2 className="text-center text-[25px] font-bold mb-8">SWR</h2>
+        <div className="mb-12 flex justify-center items-center gap-8">
+          {/* <Link href={"/SWR/get"}>
+            <Button label="GETページへ" />
+          </Link> */}
+          {/* <Link href={"/SWR/post"}>
+            <Button label="POSTページへ" />
+          </Link> */}
+          {/* <Link href={"/delete"}>
+            <Button label="DELETEページへ" />
+          </Link> */}
+        </div>
       </div>
-      <div className="mb-10 flex justify-center items-center gap-4">
-        <button onClick={resetData}>RESET</button>
-      </div>
-      <ul className="border border-white h-[500px] w-[1000px] mx-auto p-3 overflow-scroll">
-        {results.map((item, index) => (
-          <li key={index} className="border-b border-white">
-            <p>{item.Id}</p>
-            <p>{item.userId}</p>
-            <p>{item.title}</p>
-            <p>{item.body}</p>
-          </li>
-        ))}
-      </ul>
     </>
   );
 }
